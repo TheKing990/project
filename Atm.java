@@ -18,7 +18,7 @@ import javax.swing.*;
  * kjfklasjfjas
  * faksfja
  */
-
+//new comment
 public class Atm {
 	private JButton button1;
 	private JButton button2;
