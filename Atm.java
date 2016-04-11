@@ -8,7 +8,7 @@ public class Atm {
 	private JButton button1;
 	private JButton button2;
 	private JLabel messageLabel1;
-	
+	// comment
 	public Atm()
 	{
 		final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
