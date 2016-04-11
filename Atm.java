@@ -1,8 +1,20 @@
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+
+
+/*
+ * kasjflajfjalksfjlasjfjaf
+ * fanklsflasjfjasfas
+ * jflajfalksjflasjf
+ * fajflasjflajsflajs
+ * jfajsflkajfjaslkfjlas
+ * jfjalfjslfjlksajfklasjfksajfoksfjlkasjf
+ */
 
 public class Atm {
 	private JButton button1;
