@@ -7,18 +7,7 @@ import javax.swing.*;
 
 
 
-/*
- * kasjflajfjalksfjlasjfjaf
- * fanklsflasjfjasfas
- * jflajfalksjflasjf
- * fajflasjflajsflajs
- * jfajsflkajfjaslkfjlas
- * jfjalfjslfjlksajfklasjfksajfoksfjlkasjf
- * 
- * kjfklasjfjas
- * faksfja
- */
-//new comment
+
 public class Atm extends JFrame
 {
 	private JButton button1;
