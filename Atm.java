@@ -66,30 +66,6 @@ public class Atm extends JFrame
         secrect_bank.addActionListener(new secrect_back2());
         window.add(secrect_bank);
     
-//
-//        //final int WINDOW_WIDTH2 = 800, WINDOW_HEIGHT2 = 700;
-//        JFrame c_window = new JFrame("Bank of the Internet");
-//        Color db1 = new Color(119, 136, 159);
-//        Color sb1 = new Color(0, 191, 255);
-//
-//        c_window.setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
-//        c_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        c_window.setLayout(null);
-//        c_window.getContentPane().setBackground(db);
-//        //window.setVisible(true);
-//
-//        JButton c_button1 = new JButton("Log In");
-//         c_button1.setSize(100, 30);
-//        c_button1.setLocation(250, 400);
-//        c_button1.addActionListener(new Button1Clicked());
-//        c_window.add(c_button1);
-//
-//        JButton c_button2 = new JButton("Sign Up");
-//        c_button2.setSize(100, 30);
-//        c_button2.setLocation(400, 400);
-//        c_button2.addActionListener(new Button2Clicked());
-//        c_window.add(c_button2);
-
 
 
         //back 3
@@ -147,8 +123,12 @@ public class Atm extends JFrame
 
 class Caiman_bank_class
 {
-    private JButton secrect_bank;
-    private JButton eu_and_asia;
+    //private JButton secrect_bank;
+    //private JButton eu_and_asia;
+
+
+    private JLabel message_c;;
+
 
     public Caiman_bank_class()
     {
@@ -167,29 +147,52 @@ class Caiman_bank_class
         JButton c_button1 = new JButton("Log In");
         c_button1.setSize(100, 30);
         c_button1.setLocation(250, 400);
-        //c_button1.addActionListener(new Button1Clicked());
+
         c_window.add(c_button1);
 
         JButton c_button2 = new JButton("Sign Up");
         c_button2.setSize(100, 30);
         c_button2.setLocation(400, 400);
-        //c_button2.addActionListener(new Button2Clicked());
+
         c_window.add(c_button2);
+
+        message_c = new JLabel("The Atlantic Caiman Bank");
+        message_c.setSize(600, 40);
+        message_c.setFont(new Font("Verdana", Font.ITALIC, 35));
+        message_c.setForeground(sb1);
+        message_c.setLocation(180, 230);
+        c_window.add(message_c);
+
+
+        JButton back = new JButton("Go Back");
+        back.setSize(100,30);
+        back.setLocation(0,0);
+        back.addActionListener(new back_button_click());
+        c_window.add(back);
+
 
 
         c_window.setVisible(true);
 
 
     }
+    private class back_button_click implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            new Atm();
+        }
+    }
 }
 
     class Eu_Asia_bank_class {
-        //private JButton secrect_bank;
-        private JButton eu_and_asia;
 
-        public Eu_Asia_bank_class() {
+
+
+        public Eu_Asia_bank_class()
+        {
             final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
-            //final int WINDOW_WIDTH2 = 800, WINDOW_HEIGHT2 = 700;
+
             JFrame e_a_window = new JFrame("Eu and Asia Bank");
             Color db2 = new Color(119, 136, 159);
             Color sb2 = new Color(0, 191, 255);
@@ -198,23 +201,47 @@ class Caiman_bank_class
             e_a_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             e_a_window.setLayout(null);
             e_a_window.getContentPane().setBackground(db2);
-            //window.setVisible(true);
+
 
             JButton e_a_button1 = new JButton("Log In");
-            e_a_button1.setLocation(400,550);;
+            e_a_button1.setSize(100, 30);
             e_a_button1.setLocation(250, 400);
-            //c_button1.addActionListener(new Button1Clicked());
             e_a_window.add(e_a_button1);
 
             JButton e_a_button2 = new JButton("Sign Up");
             e_a_button2.setSize(100, 30);
             e_a_button2.setLocation(400, 400);
-            //c_button2.addActionListener(new Button2Clicked());
+
             e_a_window.add(e_a_button2);
+
+            JButton back = new JButton("Go Back");
+            back.setSize(100,30);
+            back.setLocation(0,0);
+            back.addActionListener(new back_button_click());
+            e_a_window.add(back);
+
+
+
+            JLabel message_e_a = new JLabel("EU and Asia International Bank");
+            message_e_a.setSize(600, 40);
+            message_e_a.setFont(new Font("Verdana", Font.ITALIC, 35));
+            message_e_a.setForeground(sb2);
+            message_e_a.setLocation(180, 250);
+            e_a_window.add(message_e_a);
+
+
+
 
 
             e_a_window.setVisible(true);
 
 
+        }
+        private class back_button_click implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                new Atm();
+            }
         }
     }
