@@ -37,7 +37,7 @@ public class Project extends MenuBeta
 				try
 				{
 					// Create a connection to the database.
-					Connection connection = DriverManager.getConnection(DB_URL ,"root", "Ip25252525"); 
+					Connection connection = DriverManager.getConnection(DB_URL ,"root", "qwer1234"); 
 					System.out.println("Connection created to ProjectData.");
 
 					// Create a Statement object.
