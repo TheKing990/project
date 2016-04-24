@@ -28,7 +28,26 @@ public class Main {
 			System.out.println(rs.getString(1) +" "+ rs.getString(2) +" "+ rs.getString(3) +" "+rs.getString(4)
 			+" "+ rs.getString(5));
 		}
+		System.out.println();
 		
+		//Test to display contents of second bank
+		rs = st.executeQuery("select * from bank2");
+		while(rs.next())
+		{
+			System.out.println(rs.getString(1) +" "+ rs.getString(2) +" "+ rs.getString(3) +" "+rs.getString(4)
+			+" "+ rs.getString(5));
+		}	
+		System.out.println();
+		
+		//Test to display contents of third bank
+		rs = st.executeQuery("select * from bank3");
+		while(rs.next())
+		{
+			System.out.println(rs.getString(1) +" "+ rs.getString(2) +" "+ rs.getString(3) +" "+rs.getString(4)
+			+" "+ rs.getString(5));
+		}
+		System.out.println();
+
 		connection.close();
 		
 		//If you get this it works
