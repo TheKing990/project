@@ -143,6 +143,7 @@ class Caiman_bank_class
         JButton c_button2 = new JButton("Sign Up");
         c_button2.setSize(100, 30);
         c_button2.setLocation(400, 400);
+        c_button2.addActionListener(new caimain_sign());
 
         c_window.add(c_button2);
 
@@ -180,6 +181,15 @@ class Caiman_bank_class
         public void actionPerformed(ActionEvent e)
         {
             new log_in();
+        }
+    }
+
+    private class caimain_sign implements ActionListener
+    {
+
+        public void actionPerformed(ActionEvent e)
+        {
+            new c_sign();
         }
     }
 

@@ -1,3 +1,5 @@
+import sun.plugin2.message.Message;
+
 import java.awt.Color;
 
 import java.awt.Font;
@@ -13,6 +15,7 @@ class log_in extends JFrame
 
     private JLabel bank_id;
     private JLabel password;
+    private JLabel message_c;
 
     private JTextField jbank_id;
     private JTextField jpassword;
@@ -28,6 +31,13 @@ class log_in extends JFrame
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
         window.getContentPane().setBackground(db);
+
+        message_c = new JLabel("The Atlantic Caiman Bank");
+        message_c.setSize(600, 40);
+        message_c.setFont(new Font("Verdana", Font.ITALIC, 35));
+        message_c.setForeground(sb);
+        message_c.setLocation(180, 230);
+        window.add(message_c);
 
         JButton c_button1 = new JButton("Sign in");
         c_button1.setSize(100, 30);
