@@ -1,7 +1,12 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.*;
+
 public class Main {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
 	{
 		// TODO Auto-generated method stub
        		Atm m =  new Atm();
