@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ProjectMenu 
 {
-
+	
 	public static void main(String[] args) 
 	{
 	}
@@ -13,6 +13,8 @@ public class ProjectMenu
 }
  class MenuBeta
 {
+	 static Boolean wActivity = false;
+	 static Boolean dActivity = false;
 	MenuBeta()
 	{
 	}
@@ -23,7 +25,8 @@ public class ProjectMenu
 		System.out.println("1. Account summary");
 		System.out.println("2. Withdrawal");
 		System.out.println("3. Deposit");
-		System.out.println("4. Logoff");
+		System.out.println("4. Current session log");
+		System.out.println("5. Log off");
 		System.out.println("What would you like to do? Please select an option: ");
 	}
 	
@@ -39,7 +42,32 @@ public class ProjectMenu
 				result.getString("LastName"), result.getDouble("CurrentBalance"), result.getInt("PIN") );
 	}	
 	
-	public static void withdrawal(Statement stmt, double withdrawAmnt, double balance, String ID)throws SQLException 
+	public static void currentSession(Statement stmt, PrintWriter session) throws IOException
+	{
+		if(wActivity == false && dActivity == false)
+		{
+			System.out.println("No activity");
+		}
+		
+		else 
+		{
+			session.close();
+			File file = new File ("session.txt"); //read the file
+			Scanner s1 = new Scanner(file);
+			
+			while(s1.hasNextLine())
+			{
+				System.out.println(s1.nextLine());
+				System.out.println("_______________");
+				System.out.println(s1.nextDouble());
+				s1.nextLine();//consume
+				System.out.println("\n");
+			}
+			s1.close();
+		}
+	}
+	
+	public static void withdrawal(Statement stmt, double withdrawAmnt, double balance, String ID, PrintWriter session)throws SQLException 
 	{  	//Code to execute withdrawal from account
 	
 		double newBalance = balance - withdrawAmnt;
@@ -50,11 +78,16 @@ public class ProjectMenu
 		// Send the statement to the DBMS (give the database an SQL command).
 		stmt.executeUpdate(sqlStatement);
 		  
+		session.println("Funds withdrawn");
+		session.println(withdrawAmnt);
+		wActivity = true;
+		session.close();
+		
 		System.out.println("Balance updated! You have successfully withdrawed " + withdrawAmnt + " dollars!");
 	}
 	
 	
-	public static void deposit(Statement stmt, double depoAmnt, double balance, String ID) throws SQLException
+	public static void deposit(Statement stmt, double depoAmnt, double balance, String ID, PrintWriter session) throws SQLException
 	{ //Code to execute deposit to account
 		
 		//System.out.println("Coming soon!");
@@ -67,6 +100,10 @@ public class ProjectMenu
 		  // Send the statement to the DBMS (give the database an SQL command).
 		  stmt.executeUpdate(sqlStatement);
 		  
+		  session.println("Funds deposited");
+		  session.println(depoAmnt);
+		  dActivity = true;
+		  session.close();
 		  System.out.println("Balance updated! You have successfully deposited " + depoAmnt + " dollars!");
 	}
 
@@ -152,12 +189,19 @@ public class ProjectMenu
 		 result.next();
 		 userName = result.getString("FirstName");
 		  System.out.println("Welcome back " + userName + "!");
-		  while (answer2 != 4) //loop until user decides to log out
+		  while (answer2 != 5) //loop until user decides to log out
 		  {
 			  //====While loop variables===================
 			  String sqlCommand;
 			  double withdrwAmnt, depoAmnt, curBalance;
+			  FileWriter fSession = new FileWriter("session.txt", true); //used for keeping track of current activity
+			  PrintWriter session = new PrintWriter (fSession); //support for above
 			  //===========================================
+			  
+			  if (answer2 > 5 || answer2 < 1)
+			  {
+				  System.out.println("Out of bounds selection! Please adjust your input.");
+			  }
 			  
 			  display_mainMenu();
 			  answer2 = in2.nextInt(); //let user select an option
@@ -186,7 +230,7 @@ public class ProjectMenu
 				  }
 				  else //you have enough funds, initiate withdrawal
 				  {
-					  withdrawal(stmt, withdrwAmnt, curBalance, userId);
+					  withdrawal(stmt, withdrwAmnt, curBalance, userId, session);
 				  }  
 			  }
 			  
@@ -200,7 +244,13 @@ public class ProjectMenu
 				  System.out.print("Please enter the amount you wish to deposit: ");
 				  depoAmnt = in2.nextDouble();
 				  in2.nextLine(); //consume key buffer
-				  deposit(stmt, depoAmnt, curBalance, userId);
+				  deposit(stmt, depoAmnt, curBalance, userId, session);
+			  }
+			  
+			  else if (answer2 == 4)
+			  {
+				  System.out.println("You've selected current session log");
+				  currentSession(stmt, session);  
 			  }
 			  
 			  //else either 4 or invalid input was selected (4 to log off)

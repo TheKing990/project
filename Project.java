@@ -2,7 +2,8 @@ import java.io.*;
 import java.util.Scanner;
 import java.sql.*;
 
-
+//533334
+//4675
 public class Project extends MenuBeta 
 { //START OF MAIN CLASS
 
@@ -45,7 +46,13 @@ public class Project extends MenuBeta
 					// Create a Statement object.
 					Statement stmt = connection.createStatement();
 					
+					PrintWriter pChecker = new PrintWriter("session.txt"); //create and or wipe out any previously left content
+					pChecker.close();
+					
+					
+					
 					loginProcessAndMainFunction(stmt);
+					
 					
 					connection.close();
 					System.out.println("Connection closed.");
@@ -76,8 +83,10 @@ public class Project extends MenuBeta
 					// Create a connection to the database.
 					Connection connection = DriverManager.getConnection(DB_URL , username, password); 
 					System.out.println("Connection created to Java.");
+					
 					// Create a Statement object.
 					Statement stmt = connection.createStatement();
+					
 					registrationProcess(stmt);
 					
 					//keyboard.close();
@@ -105,5 +114,7 @@ public class Project extends MenuBeta
 		
 		
 	}//END OF MAIN FUNCTION
+
+	
 
 }//END OF MAIN CLASS
