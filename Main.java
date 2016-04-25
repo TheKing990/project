@@ -26,35 +26,36 @@ public class Main {
             st.executeUpdate("update bank set firstname = 'Jane' where pin = '7777'");
 
             ResultSet rs = st.executeQuery("select * from bank");
-            //table has 5 columns (in order): id(12 Varchar), pin(4 varchar), balance(int), lastname(25 varchar), and firstname(25 varchar).
-            //if you want me to modify the table in any way let me know. Other banks can be individual tables or databases, let me know what you
+            //table has 6 columns (in order): ID(20 Varchar), FirstName(20 varchar), MiddleName(20 varchar), LastName(20 varchar), CurrentBalance(double),
+            //and PIN(int). If you want me to modify the table in any way let me know. Other banks can be individual tables or databases, let me know what you
             //would prefer.
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)
-                        + " " + rs.getString(5));
-            }
-            System.out.println();
-
-            //Test to display contents of second bank
-            rs = st.executeQuery("select * from bank2");
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)
-                        + " " + rs.getString(5));
-            }
-            System.out.println();
-
-            //Test to display contents of third bank
-            rs = st.executeQuery("select * from bank3");
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)
-                        + " " + rs.getString(5));
-            }
-            System.out.println();
+	    while(rs.next())
+	    {
+		System.out.println(rs.getString(1) +" "+ rs.getString(2) +" "+ rs.getString(3) +" "+rs.getString(4)
+		+" "+ rs.getString(5) + " " + rs.getString(6));
+	    }
+	    System.out.println();
+		
+	    rs = st.executeQuery("select * from bank2");
+	    while(rs.next())
+	    {
+		System.out.println(rs.getString(1) +" "+ rs.getString(2) +" "+ rs.getString(3) +" "+rs.getString(4)
+		+" "+ rs.getString(5) + " " + rs.getString(6));
+      	    }	
+		System.out.println();
+		
+	    rs = st.executeQuery("select * from bank3");
+	    while(rs.next())
+	    {
+		System.out.println(rs.getString(1) +" "+ rs.getString(2) +" "+ rs.getString(3) +" "+rs.getString(4)
+		+" "+ rs.getString(5) + " " + rs.getString(6) );
+	    }
+	    System.out.println();
 
 
 		
-		//If you get this it works
-		System.out.println("Test complete");
+	    //If you get this it works
+	    System.out.println("Test complete");
 	}
 
 }
