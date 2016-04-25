@@ -107,9 +107,3 @@ public class Project extends MenuBeta
 	}//END OF MAIN FUNCTION
 
 }//END OF MAIN CLASS
-
-		
-		
-	}//END OF MAIN FUNCTION
-
-}//END OF MAIN CLASS
