@@ -93,6 +93,7 @@ public class Atm extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             new Caiman_bank_class();
+            Atm.this.dispose();
 
         }
     }
@@ -102,6 +103,7 @@ public class Atm extends JFrame
         public void actionPerformed(ActionEvent e)
         {
            new  Eu_Asia_bank_class();
+            Atm.this.dispose();
         }
     }
 
@@ -181,6 +183,9 @@ class Caiman_bank_class
         public void actionPerformed(ActionEvent e)
         {
             new log_in();
+
+
+
         }
     }
 

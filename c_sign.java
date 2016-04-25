@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.*;
 
 
@@ -32,6 +33,9 @@ public class c_sign
     private JTextField jpassword;
 
     c_sign(){
+
+
+        function fuc = new function();
 
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
         JFrame window = new JFrame("Sign In");
@@ -64,7 +68,8 @@ public class c_sign
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                String str = jfn.getText();
+                String str1 = jfn.getText();
+                fuc.add_fname(str1);
 
             }
 
@@ -93,7 +98,8 @@ public class c_sign
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                String str = jln.getText();
+                String str2 = jln.getText();
+                fuc.add_lname(str2);
 
             }
 
@@ -127,7 +133,8 @@ public class c_sign
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                String str = juserp.getText();
+                String str3 = juserp.getText();
+                fuc.add_password(str3);
 
             }
 
@@ -161,7 +168,8 @@ public class c_sign
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                String str = jid.getText();
+                String str4 = jid.getText();
+                fuc.add_id(str4);
 
             }
 
@@ -177,6 +185,28 @@ public class c_sign
         c_button1.setSize(100, 30);
         c_button1.setLocation(300, 400);
         //c_button1.addActionListener();
+        c_button1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    fuc.add_c_bank();
+                } catch (InstantiationException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalAccessException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+
+                new Caiman_bank_class();
+            }
+        });
+
+
         window.add(c_button1);
 
 

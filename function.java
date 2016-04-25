@@ -1,6 +1,7 @@
 /**
  * Created by jhovanygonzalez on 4/25/16.
  */
+import java.security.SecureRandom;
 import java.sql.*;
 
 import javax.swing.JFrame;
@@ -15,6 +16,8 @@ class function
     String c_ln;
     String c_ps;
     String c_id;
+    String c_password;
+
     void add_fname(String n){
         c_fn = n;
     }
@@ -27,27 +30,43 @@ class function
     void add_id(String n){
         c_id = n;
     }
-    public  void add_c_bank()
+
+
+
+
+    public  void add_c_bank() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
     {
-        double money = 0.0;
+        double c_money = 0.0;
+        int bank_num1 = 1;
+        while (true) {
+            c_password = rnum();
+            boolean c2 = c_id_check(c_password);
+            if (c2 == false){
+                break;
+            }
+        }
 
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            String url = "jdbc:mysql://localhost:3306/carmax" ;
-            Connection conn = DriverManager.getConnection(url,"root","1234qwer");
+
+            String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+            String userName = "aws1";
+            String password = "passw0rd";
+            String dbName = "Java";
             //Statement st = conn.createStatement();
-            if(v != null&& b!= null&& model != null&& y != null&& m != null&& p != null && c!= null)
+            Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+            if(c_fn != null&& c_ln!= null&& c_ps != null&& c_id != null)
             {
-                String sql = "INSERT INTO cars ( vin ,brand ,model, year ,mileage,price,color ) VALUES (?, ?, ?, ?, ?,?,?)";
+                String sql = "INSERT INTO Caiman ( ID ,Money ,fname, lname ,pword,upassword,back_number ) VALUES (?, ?, ?, ?, ?,?,?)";
 
                 PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setString(1, v);
-                preparedStatement.setString(2, b);
-                preparedStatement.setString(3, model);
-                preparedStatement.setInt(4, year);
-                preparedStatement.setInt(5, mil);
-                preparedStatement.setInt(6, pri);
-                preparedStatement.setString(7, c);
+                preparedStatement.setString(1, c_id);
+                preparedStatement.setDouble(2, c_money);
+                preparedStatement.setString(3, c_fn);
+                preparedStatement.setString(4, c_ln);
+                preparedStatement.setString(5, c_password);
+                preparedStatement.setString(6, c_ps);
+                preparedStatement.setInt(7, bank_num1);
                 preparedStatement.executeUpdate();
 
 
@@ -71,6 +90,48 @@ class function
 
         }
     }
+
+
+    String rnum()
+    {
+        final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+         SecureRandom rnd = new SecureRandom();
+        int len = 10;
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
+    }
+
+    boolean c_id_check(String n) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+        String check = n;
+        boolean c1;
+        String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+
+
+        final String queryCheck = "SELECT * from Caiman WHERE pword = ?";
+        final PreparedStatement ps = conn.prepareStatement(queryCheck);
+        ps.setString(1, check);
+        final ResultSet resultSet = ps.executeQuery();
+        if(resultSet.next()) {
+            final int count = resultSet.getInt(1);
+           c1 =true;
+        }
+        else{
+            c1 =false;
+        }
+        conn.close();
+        return c1;
+
+    }
+
 
 
 }
