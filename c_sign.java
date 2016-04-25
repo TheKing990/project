@@ -200,6 +200,8 @@ public class c_sign
                     e1.printStackTrace();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
                 }
 
                 new Caiman_bank_class();

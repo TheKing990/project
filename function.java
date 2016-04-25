@@ -1,9 +1,19 @@
 /**
  * Created by jhovanygonzalez on 4/25/16.
  */
+import sun.misc.BASE64Encoder;
+
+import java.security.Key;
 import java.security.SecureRandom;
 import java.sql.*;
 
+import java.security.Key;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import javax.crypto.Cipher;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -17,6 +27,46 @@ class function
     String c_ps;
     String c_id;
     String c_password;
+
+
+    //
+    String c_firstn;
+    String c_lastn;
+    String c_getid;
+    String c_ency_pass;
+
+
+    private static final String ALGORITHM = "AES";
+    private static final String KEY = "1Hbfh667adfDEJ78";
+
+    public static String encrypt(String value) throws Exception
+    {
+        Key key = generateKey();
+        Cipher cipher = Cipher.getInstance(function.ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte [] encryptedByteValue = cipher.doFinal(value.getBytes("utf-8"));
+        String encryptedValue64 = new BASE64Encoder().encode(encryptedByteValue);
+        return encryptedValue64;
+
+    }
+
+    public static String decrypt(String value) throws Exception
+    {
+        Key key = generateKey();
+        Cipher cipher = Cipher.getInstance(function.ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte [] decryptedValue64 = new BASE64Decoder().decodeBuffer(value);
+        byte [] decryptedByteValue = cipher.doFinal(decryptedValue64);
+        String decryptedValue = new String(decryptedByteValue,"utf-8");
+        return decryptedValue;
+
+    }
+
+    private static Key generateKey() throws Exception
+    {
+        Key key = new SecretKeySpec(function.KEY.getBytes(),function.ALGORITHM);
+        return key;
+    }
 
     void add_fname(String n){
         c_fn = n;
@@ -34,10 +84,23 @@ class function
 
 
 
-    public  void add_c_bank() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
-    {
+    public  void add_c_bank() throws Exception {
         double c_money = 0.0;
         int bank_num1 = 1;
+
+        try {
+           c_firstn = encrypt(c_fn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+         c_lastn = encrypt(c_ln);
+        c_getid = encrypt(c_id);
+        c_ency_pass = encrypt(c_ps);
+
+
+
+
         while (true) {
             c_password = rnum();
             boolean c2 = c_id_check(c_password);
@@ -60,12 +123,12 @@ class function
                 String sql = "INSERT INTO Caiman ( ID ,Money ,fname, lname ,pword,upassword,back_number ) VALUES (?, ?, ?, ?, ?,?,?)";
 
                 PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setString(1, c_id);
+                preparedStatement.setString(1, c_getid);
                 preparedStatement.setDouble(2, c_money);
-                preparedStatement.setString(3, c_fn);
-                preparedStatement.setString(4, c_ln);
+                preparedStatement.setString(3, c_firstn);
+                preparedStatement.setString(4, c_lastn);
                 preparedStatement.setString(5, c_password);
-                preparedStatement.setString(6, c_ps);
+                preparedStatement.setString(6, c_ency_pass);
                 preparedStatement.setInt(7, bank_num1);
                 preparedStatement.executeUpdate();
 
