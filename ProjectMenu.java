@@ -19,7 +19,7 @@ public class ProjectMenu
 	
 	public static void display_mainMenu()
 	{
-		System.out.println("Main menu");
+		System.out.println("\nMain menu");
 		System.out.println("1. Account summary");
 		System.out.println("2. Withdrawal");
 		System.out.println("3. Deposit");
@@ -27,10 +27,15 @@ public class ProjectMenu
 		System.out.println("What would you like to do? Please select an option: ");
 	}
 	
-	public void display_accountSummary()
+	public static void display_accountSummary(Statement stmt, ResultSet result) throws SQLException
 	{
 		//Show user name, ID, PIN, Current session log activity, current balance and any other important information about the user's account
 		System.out.println("Coming soon!");
+		result.next();
+		String stringy = result.getString("ID");
+		System.out.printf("%-20s", result.getString("ID"));
+		//System.out.printf(%20s, %20s, %20s, %20s, %20f, %4d, result.getString("ID"), result.getString("FirstName"), result.getString("MiddleName"),
+			//	result.getString("LastName"), result.getDouble("CurrentBalance"), result.getInt("PIN"));
 		
 	}	
 	
@@ -112,7 +117,7 @@ public class ProjectMenu
 		while(result3.next())
 		{
 			if (userId.equals(result3.getString("ID")) && userPIN == result3.getInt("PIN"))
-			{//THIS IS JUST A TEST
+			{
 				System.out.println("match");
 				break;
 			}
@@ -160,7 +165,9 @@ public class ProjectMenu
 			  if (answer2 == 1) //account summary selected 
 			  {
 				  System.out.println("You've selected account summary.");
-				  
+				  sqlCommand = "SELECT * FROM users WHERE id = " + "'" + userId + "'";
+				  result = stmt.executeQuery(sqlCommand);
+				  display_accountSummary(stmt, result);
 			  }
 			  
 			  else if (answer2 == 2) //withdrawal selected
