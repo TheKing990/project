@@ -32,11 +32,11 @@ public class ProjectMenu
 		//Show user name, ID, PIN, Current session log activity, current balance and any other important information about the user's account
 		System.out.println("Coming soon!");
 		result.next();
-		String stringy = result.getString("ID");
-		System.out.printf("%-20s", result.getString("ID"));
-		//System.out.printf(%20s, %20s, %20s, %20s, %20f, %4d, result.getString("ID"), result.getString("FirstName"), result.getString("MiddleName"),
-			//	result.getString("LastName"), result.getDouble("CurrentBalance"), result.getInt("PIN"));
-		
+		String ID = "ID", FNAME = "FIRST NAME" , MNAME = "MIDDLE NAME" , LNAME = "LAST NAME" , BALANCE = "BALANCE" , PIN = "PIN";
+		System.out.printf("%-20s%-20s%-20s%-20s%-20s%-4s", ID, FNAME, MNAME, LNAME, BALANCE, PIN); 
+		System.out.println();
+		System.out.printf("%-20s%-20s%-20s%-20s%-20.2f%-4d", result.getString("ID"), result.getString("FirstName"), result.getString("MiddleName"),
+				result.getString("LastName"), result.getDouble("CurrentBalance"), result.getInt("PIN") );
 	}	
 	
 	public static void withdrawal(Statement stmt, double withdrawAmnt, double balance, String ID)throws SQLException 
