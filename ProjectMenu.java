@@ -129,8 +129,6 @@ public class ProjectMenu
 				}
 				else if (regAnswer.equals("no") || regAnswer.equals("No") || regAnswer.equals("NO"))
 				{ //let user try again
-					System.out.println(result3.getString("ID"));
-					System.out.println(result3.getInt("PIN"));
 					System.out.print("Please input your ID: ");
 					userId = in2.nextLine();
 					System.out.print("Now please input your PIN number: ");
