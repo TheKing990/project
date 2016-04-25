@@ -45,7 +45,7 @@ public class ProjectMenu
 		double newBalance = balance - withdrawAmnt;
 		  
 		// Create a string utilizing withdraw.
-		String sqlStatement = "UPDATE users SET CurrentBalance = " + "'" + Double.toString(newBalance) + "'" + "WHERE id = " + "'" + ID + "'";
+		String sqlStatement = "UPDATE bank SET CurrentBalance = " + "'" + Double.toString(newBalance) + "'" + "WHERE id = " + "'" + ID + "'";
 		
 		// Send the statement to the DBMS (give the database an SQL command).
 		stmt.executeUpdate(sqlStatement);
@@ -62,7 +62,7 @@ public class ProjectMenu
 		double newBalance = balance + depoAmnt;
 		
 		  // Create a string utilizing deposit
-		  String sqlStatement = "UPDATE users " + "SET CurrentBalance = " + "'" + Double.toString(newBalance) + "'" + "WHERE ID = " + "'" + ID + "'";
+		  String sqlStatement = "UPDATE bank " + "SET CurrentBalance = " + "'" + Double.toString(newBalance) + "'" + "WHERE ID = " + "'" + ID + "'";
 		
 		  // Send the statement to the DBMS (give the database an SQL command).
 		  stmt.executeUpdate(sqlStatement);
@@ -72,7 +72,7 @@ public class ProjectMenu
 
 	public static void registration (Statement stmt, String ID, String firstName, String middleName, String lastName, double balance, int PIN) throws SQLException
 	{
-		String sqlStatement = "INSERT INTO users VALUES ('" + ID + "'" + "," + "'" + firstName + "'," +  "'" + middleName + "'," + 
+		String sqlStatement = "INSERT INTO bank VALUES ('" + ID + "'" + "," + "'" + firstName + "'," +  "'" + middleName + "'," + 
 	"'" + lastName + "'," + Double.toString(balance) + "," + Integer.toString(PIN) + ")";
 		
 		stmt.execute(sqlStatement);
@@ -112,7 +112,7 @@ public class ProjectMenu
 		System.out.print("Now please input your PIN number: ");
 		userPIN = in2.nextInt();
 		in2.nextLine(); //consume key buffer
-		sqlCommand2 = "SELECT ID, PIN FROM users";
+		sqlCommand2 = "SELECT ID, PIN FROM bank";
 		result3 = stmt.executeQuery(sqlCommand2);
 		while(result3.next())
 		{
@@ -146,7 +146,7 @@ public class ProjectMenu
 			}
 		
 		  // Create a string with a SELECT statement.
-		  String sqlNStatement = "SELECT FirstName FROM users WHERE id = " + "'" +  userId + "'";
+		  String sqlNStatement = "SELECT FirstName FROM bank WHERE id = " + "'" +  userId + "'";
 		  // Send the statement to the DBMS (give the database an SQL command).
 		 result = stmt.executeQuery(sqlNStatement);
 		 result.next();
@@ -165,7 +165,7 @@ public class ProjectMenu
 			  if (answer2 == 1) //account summary selected 
 			  {
 				  System.out.println("You've selected account summary.");
-				  sqlCommand = "SELECT * FROM users WHERE id = " + "'" + userId + "'";
+				  sqlCommand = "SELECT * FROM bank WHERE id = " + "'" + userId + "'";
 				  result = stmt.executeQuery(sqlCommand);
 				  display_accountSummary(stmt, result);
 			  }
@@ -173,7 +173,7 @@ public class ProjectMenu
 			  else if (answer2 == 2) //withdrawal selected
 			  {
 				  System.out.println("You've selected withdrawal.");
-				  sqlCommand = "SELECT CurrentBalance FROM users WHERE id = " + "'" + userId + "'";
+				  sqlCommand = "SELECT CurrentBalance FROM bank WHERE id = " + "'" + userId + "'";
 				  result = stmt.executeQuery(sqlCommand);
 				  result.next(); //place cursor at first row (only row)
 				  curBalance = result.getDouble(1);
@@ -193,7 +193,7 @@ public class ProjectMenu
 			  else if (answer2 == 3) //deposit selected
 			  {
 				 System.out.println("You've selected deposit."); 
-				  sqlCommand = "SELECT CurrentBalance FROM users WHERE id = " + "'" + userId + "'";
+				  sqlCommand = "SELECT CurrentBalance FROM bank WHERE id = " + "'" + userId + "'";
 				  result = stmt.executeQuery(sqlCommand);
 				  result.next(); //place cursor at first row (only row)
 				  curBalance = result.getDouble(1);
@@ -218,7 +218,7 @@ public class ProjectMenu
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		  
 		  //Give SQL command (used for checking if ID the user requests is already in use)
-		  SQLCommand = "SELECT id FROM users";
+		  SQLCommand = "SELECT id FROM bank";
 		  result2 = stmt.executeQuery(SQLCommand);
 		  result2.next(); //initialize to first row
 		  
@@ -231,7 +231,7 @@ public class ProjectMenu
 				{
 					while(ID.equals(result2.getString("ID"))) 
 					{
-						System.out.println("I'm sorry. That user ID has already been taken. Please enter another ID...");
+						System.out.println("I'm sorry. That bank ID has already been taken. Please enter another ID...");
 						ID = keyboard.nextLine();
 						//keyboard.nextLine(); //consume key buffer
 						System.out.println("Input received. Now verifying...");
