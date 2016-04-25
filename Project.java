@@ -46,13 +46,11 @@ public class Project extends MenuBeta
 					// Create a Statement object.
 					Statement stmt = connection.createStatement();
 					
+					//***This part here is used for current session log. This creates the file and erases any content that was left behind by previous session(s)*** 
 					PrintWriter pChecker = new PrintWriter("session.txt"); //create and or wipe out any previously left content
 					pChecker.close();
 					
-					
-					
 					loginProcessAndMainFunction(stmt);
-					
 					
 					connection.close();
 					System.out.println("Connection closed.");
