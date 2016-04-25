@@ -31,14 +31,16 @@ public class Project extends MenuBeta
 				//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 				// Create a named constant for the URL.
 				// NOTE: This value is specific for Java DB.
-				final String DB_URL = "jdbc:mysql://localhost:3306/projectdata";
+				final String DB_URL = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/Java";
+				final String password = "passw0rd";
+				final String username = "aws1";
 				Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 
 				try
 				{
 					// Create a connection to the database.
-					Connection connection = DriverManager.getConnection(DB_URL ,"root", "qwer1234"); 
-					System.out.println("Connection created to ProjectData.");
+					Connection connection = DriverManager.getConnection(DB_URL , username, password); 
+					System.out.println("Connection created to Java.");
 
 					// Create a Statement object.
 					Statement stmt = connection.createStatement();
@@ -63,15 +65,17 @@ public class Project extends MenuBeta
 			{//-------Walkthrough registration---------------------------------------------------------------------------------------------
 				//START OF MAIN ELSE IF	
 				ResultSet result3;
-				final String DB_URL = "jdbc:mysql://localhost:3306/projectdata"; //database location
+				final String DB_URL = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/Java"; //database location
+				final String username = "aws1";
+				final String password = "passw0rd";
 
 				Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 
 				try
 				{
 					// Create a connection to the database.
-					Connection connection = DriverManager.getConnection(DB_URL ,"root", "Ip25252525"); 
-					System.out.println("Connection created to ProjectData.");
+					Connection connection = DriverManager.getConnection(DB_URL , username, password); 
+					System.out.println("Connection created to Java.");
 					// Create a Statement object.
 					Statement stmt = connection.createStatement();
 					registrationProcess(stmt);
@@ -98,6 +102,12 @@ public class Project extends MenuBeta
 			} //END OF MAIN ELSE
 
 		} //END OF WHILE LOOP (Appropriate response loop)
+		
+		
+	}//END OF MAIN FUNCTION
+
+}//END OF MAIN CLASS
+
 		
 		
 	}//END OF MAIN FUNCTION
