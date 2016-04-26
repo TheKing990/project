@@ -49,20 +49,20 @@ public class Atm extends JFrame
 		window.add(messageLabel1);
 
            //bank 2
-        secrect_bank = new JButton("Caiman Bank");
-        secrect_bank.setSize(100,40);
-        secrect_bank.setLocation(200,550);
-        secrect_bank.addActionListener(new secrect_back2());
-        window.add(secrect_bank);
+//        secrect_bank = new JButton("Caiman Bank");
+//        secrect_bank.setSize(100,40);
+//        secrect_bank.setLocation(200,550);
+//        secrect_bank.addActionListener(new secrect_back2());
+//        window.add(secrect_bank);
     
 
 
-        //back 3
-        eu_and_asia = new JButton("EU and Asia Bank");
-        eu_and_asia.setSize(150,40);
-        eu_and_asia.setLocation(400,550);
-        eu_and_asia.addActionListener(new eu_and_asia2());
-        window.add(eu_and_asia);
+//        //back 3
+//        eu_and_asia = new JButton("EU and Asia Bank");
+//        eu_and_asia.setSize(150,40);
+//        eu_and_asia.setLocation(400,550);
+//        eu_and_asia.addActionListener(new eu_and_asia2());
+//        window.add(eu_and_asia);
 
 
 
@@ -88,22 +88,7 @@ public class Atm extends JFrame
 			}
 	}
 
-    private class secrect_back2 implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            new Caiman_bank_class();
-
-        }
-    }
-
-    private class eu_and_asia2 implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-           new  Eu_Asia_bank_class();
-        }
-    }
+   
 
 
 
