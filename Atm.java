@@ -803,7 +803,7 @@ class c_sign {
 				{
 					public void actionPerformed(ActionEvent e)
 					{//Already Works
-						new log_in();
+						new Atm();
 						window.dispose();
 					
 					}
