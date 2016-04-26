@@ -356,7 +356,7 @@ public class ProjectMenu
 				  System.out.println("Out of bounds selection! Please adjust your input.");
 			  }
 			  
-			  //else either 4 or invalid input was selected (4 to log off)
+			  //else either 6 or invalid input was selected (4 to log off)
 		  } 
 	}
 	
