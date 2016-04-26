@@ -46,7 +46,15 @@ public class Atm extends JFrame
 		button2 = new JButton("Sign Up");
 		button2.setSize(100, 30);
 		button2.setLocation(400, 400);
-		button2.addActionListener(new Button2Clicked());
+		button2.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				new c_sign();
+				window.dispose();
+			
+			}
+		});
 		window.add(button2);
 		
 		messageLabel1 = new JLabel("Bank of the Internet");
@@ -72,13 +80,13 @@ public class Atm extends JFrame
 			}
 	} */
 	
-	private class Button2Clicked implements ActionListener
+	/*private class Button2Clicked implements ActionListener
 	{
 			public void actionPerformed(ActionEvent e)
 			{
 				new c_sign();
 			}
-	}
+	}*/
 
    
 
@@ -331,7 +339,7 @@ class userMenu
 				});
 		window.add(button3);
 		
-		button4 = new JButton("Current Session Log");
+		/*button4 = new JButton("Current Session Log");
 		button4.setSize(200, 30);
 		button4.setLocation(250, 400);
 		button4.addActionListener(new ActionListener()
@@ -343,17 +351,17 @@ class userMenu
 					
 					}
 				});
-		window.add(button4);
+		window.add(button4);*/
 		
 		button5 = new JButton("Transfer Funds");
 		button5.setSize(200, 30);
-		button5.setLocation(250, 450);
+		button5.setLocation(250, 400);
 		button5.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
-						new log_in();
-						window.dispose();
+						new transferFunds(id, pin);
+						//window.dispose();
 					
 					}
 				});
@@ -361,7 +369,7 @@ class userMenu
 
 		button6 = new JButton("Log Off");
 		button6.setSize(200, 30);
-		button6.setLocation(250, 500);
+		button6.setLocation(250, 450);
 		button6.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
@@ -372,14 +380,97 @@ class userMenu
 					}
 				});
 		window.add(button6);
-       // display();
         
         
         window.setVisible(true);
     }
 }
 
+class transferFunds
+{
+	private JButton button1;
+	private JTextField tId;
+	private JTextField tAmnt;
+	private JLabel Label1;
+	private JLabel Label2;
+	
+	transferFunds(String id, String pin)
+	{
+		function f = new function();
+    	
+        final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
+        JFrame window = new JFrame("Transfer Funds");
+        Color db = new Color(119, 136, 159);
+       
 
+        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLayout(null);
+        window.getContentPane().setBackground(db);
+        
+        tId = new JTextField(10);
+        tId.setSize(160, 30);
+        tId.setLocation(400, 300);
+        tId.setText("");
+        tId.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                String str = tId.getText();;
+            }
+
+
+        });
+        window.add(tId);
+        
+        tAmnt = new JTextField(10);
+        tAmnt.setSize(160, 30);
+        tAmnt.setLocation(400, 350);
+        tAmnt.setText("0.0");
+        tAmnt.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                String str = tAmnt.getText();;
+            }
+
+
+        });
+        window.add(tAmnt);
+        
+        Label1= new JLabel("ID");
+        Label1.setSize(100, 30);
+        Label1.setLocation(380, 300);
+        window.add(Label1);
+        
+        Label2 = new JLabel("Transfer Amount");
+        Label2.setSize(100, 30);
+        Label2.setLocation(300, 350);
+        window.add(Label2);
+        
+        button1 = new JButton("Transfer Funds");
+		button1.setSize(200, 30);
+		button1.setLocation(250, 400);
+		button1.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{						
+						try {
+							f.transferFunds(id, pin, Double.parseDouble(tAmnt.getText()), tId.getText());
+						} catch (NumberFormatException | InstantiationException | IllegalAccessException
+								| ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						window.dispose();
+					
+					}
+				});
+		window.add(button1);
+        
+        window.setVisible(true);
+	}
+}
 
 class c_sign
 {
@@ -575,7 +666,7 @@ class c_sign
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-
+                window.dispose();
                 new Atm();
             }
         });
