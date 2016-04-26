@@ -1,4 +1,3 @@
-
 //import sun.misc.BASE64Encoder;
 import java.security.Key;
 import java.security.SecureRandom;
@@ -250,6 +249,32 @@ class function
 	    stmt.executeUpdate("UPDATE bank SET currentbalance = "+ n +" WHERE id = '" + id + "';");
     }
     
+    void transferFunds(String id, String pin, Double Amnt, String oid) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+    	String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+        Statement stmt = conn.createStatement();
+		
+        Double add = Amnt;
+        
+	    String query = "select * from bank where id = '" + id + "';";
+	    ResultSet rs1 = stmt.executeQuery(query);
+	    rs1.next();
+	    Amnt = rs1.getInt(5)- Amnt; 
+	    stmt.executeUpdate("UPDATE bank SET currentbalance = "+ Amnt +" WHERE id = '" + id + "';");
+	    
+	    query = "select * from bank where id = '" + oid + "';";
+	    ResultSet rs2 = stmt.executeQuery(query);
+	    rs2.next();
+	    add = rs2.getInt(5)+ add; 
+	    stmt.executeUpdate("UPDATE bank SET currentbalance = "+ add +" WHERE id = '" + oid + "';");
+    }
+    
     boolean c_id_check(String n) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
     {
         String check = n;
@@ -280,12 +305,5 @@ class function
     }
 
     
-
-
-    void caiman_log(){
-
-    }
-
-
 
 }
