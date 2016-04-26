@@ -13,6 +13,7 @@ public class ProjectMenu
 }
  class MenuBeta
 {
+	 static Boolean tActivity = false;
 	 static Boolean wActivity = false;
 	 static Boolean dActivity = false;
 	MenuBeta()
@@ -26,7 +27,8 @@ public class ProjectMenu
 		System.out.println("2. Withdrawal");
 		System.out.println("3. Deposit");
 		System.out.println("4. Current session log");
-		System.out.println("5. Log off");
+		System.out.println("5. Transfer funds");
+		System.out.println("6. Log off");
 		System.out.println("What would you like to do? Please select an option: ");
 	}
 	
@@ -44,7 +46,7 @@ public class ProjectMenu
 	
 	public static void currentSession(Statement stmt, PrintWriter session) throws IOException
 	{
-		if(wActivity == false && dActivity == false)
+		if(wActivity == false && dActivity == false && tActivity == false)
 		{
 			System.out.println("No activity");
 		}
@@ -59,7 +61,7 @@ public class ProjectMenu
 			{
 				System.out.println(s1.nextLine());
 				System.out.println("_______________");
-				System.out.println(s1.nextDouble());
+				System.out.printf("%-20.2f",s1.nextDouble());
 				s1.nextLine();//consume
 				System.out.println("\n");
 			}
@@ -86,6 +88,97 @@ public class ProjectMenu
 		System.out.println("Balance updated! You have successfully withdrawed " + withdrawAmnt + " dollars!");
 	}
 	
+	public static void transferFunds(Statement stmt, double transferAmnt, double balance, String ID, PrintWriter session) throws SQLException
+	{
+		//----Variables-----------------
+		String tID, SQLCommand, answer2, answer = "null", tName;
+		Scanner in = new Scanner(System.in);
+		ResultSet result;
+		Boolean userFound = false, exit = true, exit2 = true;
+		//----Variables-----------------
+		
+		while(exit2)
+		{
+			if(transferAmnt > balance)
+			{
+				System.out.println("Unfortunately you currently do not have a sufficient balance for this transfer.");
+				System.out.println("Please deposit funds or adjust your transfer parameter.");
+				exit2 = false;
+			}
+			else
+			{
+				System.out.print("Please input the ID of the user you would like to transfer funds to: ");
+				tID = in.nextLine();
+				SQLCommand = "SELECT ID, FirstName FROM bank";
+				result = stmt.executeQuery(SQLCommand);
+				//tName = result.getString(2);
+				while(result.next())
+				{
+					if(tID.equals(result.getString("ID")))
+					{
+						userFound = true;
+						break;
+					}
+				}
+				if(userFound == true) //user to transfer ID was found by user input, so proceed
+				{
+					System.out.println("User ID found!");
+					System.out.print("Are you sure you would like to continue with the transfer? (Input yes or no): ");
+					answer2 = in.nextLine();
+					while(exit)
+					{
+						if (answer2.equals("YES")|| answer2.equals("Yes") || answer2.equals("yes") || answer2.equals("NO") || answer2.equals("No") || answer2.equals("no"))
+						{
+							System.out.println("Correct response recorded!");
+							exit = false;
+						}
+						else
+						{
+							System.out.print("Incorrect response. Please try again.: ");
+							answer2 = in.nextLine();
+						}
+							
+					}
+					if(answer2.equals("YES")|| answer2.equals("Yes") || answer2.equals("yes"))
+					{
+						
+						double newBalance = balance - transferAmnt;
+						SQLCommand = "UPDATE bank SET CurrentBalance = " + "'" + Double.toString(newBalance) + "'" + " WHERE ID = " + "'" + ID + "'"; // update host transfer's balance
+						stmt.executeUpdate(SQLCommand);
+						SQLCommand = "UPDATE bank SET CurrentBalance = " + "'" + Double.toString(transferAmnt) + "'" + " WHERE ID = " + "'" + tID + "'"; // update recipient's balance
+						stmt.executeUpdate(SQLCommand);
+						System.out.println("Funds have been successfully transfered!");
+						session.println("Funds transfered");
+						session.println(transferAmnt);
+						tActivity = true;
+						session.close();
+						exit2 = false;
+					}
+
+					else if (answer2.equals("NO")|| answer2.equals("No") || answer2.equals("no"))
+					{
+						System.out.println("Acknowledged...Exitting transfer option.");
+						session.println("Canceled transfer");
+						session.println(transferAmnt);
+						tActivity = true;
+						session.close();
+						exit2 = false;
+					}
+				}
+				else //user not found of course
+				{
+					System.out.println("User ID was not found in our system. Please adjust your parameter.");
+					System.out.print("If you'd like to exit, please type in exit or press any key to retry: ");
+					answer = in.nextLine();
+					if(answer.equals("exit") || answer.equals("Exit") || answer.equals("EXIT"))
+					{
+						exit2 = false;
+					}
+				}
+			}
+				
+		}
+	}
 	
 	public static void deposit(Statement stmt, double depoAmnt, double balance, String ID, PrintWriter session) throws SQLException
 	{ //Code to execute deposit to account
@@ -155,7 +248,6 @@ public class ProjectMenu
 		{
 			if (userId.equals(result3.getString("ID")) && userPIN == result3.getInt("PIN"))
 			{
-				System.out.println("match");
 				break;
 			}
 			else if(result3.isLast())
@@ -189,19 +281,14 @@ public class ProjectMenu
 		 result.next();
 		 userName = result.getString("FirstName");
 		  System.out.println("Welcome back " + userName + "!");
-		  while (answer2 != 5) //loop until user decides to log out
+		  while (answer2 != 6) //loop until user decides to log out
 		  {
 			  //====While loop variables===================
 			  String sqlCommand;
-			  double withdrwAmnt, depoAmnt, curBalance;
+			  double withdrwAmnt,transferAmnt, depoAmnt, curBalance;
 			  FileWriter fSession = new FileWriter("session.txt", true); //used for keeping track of current activity
 			  PrintWriter session = new PrintWriter (fSession); //support for above
 			  //===========================================
-			  
-			  if (answer2 > 5 || answer2 < 1)
-			  {
-				  System.out.println("Out of bounds selection! Please adjust your input.");
-			  }
 			  
 			  display_mainMenu();
 			  answer2 = in2.nextInt(); //let user select an option
@@ -247,10 +334,26 @@ public class ProjectMenu
 				  deposit(stmt, depoAmnt, curBalance, userId, session);
 			  }
 			  
-			  else if (answer2 == 4)
+			  else if (answer2 == 4) //current session log
 			  {
 				  System.out.println("You've selected current session log");
 				  currentSession(stmt, session);  
+			  }
+			  
+			  else if (answer2 == 5) //transfer funds
+			  {
+				  System.out.println("You've selected transfer funds");
+				  System.out.print("How much would you like to transfer?: ");
+				  transferAmnt = in2.nextDouble();
+				  sqlCommand = "SELECT CurrentBalance FROM bank WHERE id = " + "'" + userId + "'";
+				  result = stmt.executeQuery(sqlCommand);
+				  result.next(); //place cursor at first row (only row)
+				  curBalance = result.getDouble(1);
+				  transferFunds(stmt, transferAmnt, curBalance,userId,session);
+			  }
+			  else if (answer2 < 1 || answer2 > 6)
+			  {
+				  System.out.println("Out of bounds selection! Please adjust your input.");
 			  }
 			  
 			  //else either 4 or invalid input was selected (4 to log off)
@@ -326,8 +429,7 @@ public class ProjectMenu
 		loginProcessAndMainFunction(stmt);	
 	}
 	
-	public void transferFunds()
-	{}
+	
 	public void removeUser()
 	{}
 	
