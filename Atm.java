@@ -92,6 +92,7 @@ class log_in
 
     log_in() {
        // admin_log me  = new admin_log();
+        function fuc2 = new function();
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
         JFrame window = new JFrame("Log In");
         Color db = new Color(119, 136, 159);
@@ -109,14 +110,9 @@ class log_in
         message_c.setLocation(180, 230);
         window.add(message_c);
 
-        JButton c_button1 = new JButton("Sign in");
-        c_button1.setSize(100, 30);
-        c_button1.setLocation(300, 400);
-        //c_button1.addActionListener();
-        window.add(c_button1);
 
 
-        bank_id = new JLabel("Bank Account");
+        bank_id = new JLabel("ID");
         bank_id.setSize(100, 30);
         bank_id.setLocation(50, 400);
         window.add(bank_id);
@@ -129,7 +125,7 @@ class log_in
             public void actionPerformed(ActionEvent arg0)
             {
                 String str = jbank_id.getText();
-               // me.add_id(str);
+              fuc2.search_id(str);
 
 
             }
@@ -140,7 +136,7 @@ class log_in
 
 
 
-        password = new JLabel("Password");
+        password = new JLabel("Pin");
         password.setSize(100, 30);
         password.setLocation(50, 450);
         window.add(password);
@@ -154,7 +150,7 @@ class log_in
             public void actionPerformed(ActionEvent arg0)
             {
                 String str1 = jpassword.getText();
-              //  me.add_pass_(str1);
+                fuc2.search_pin(str1);
 
             }
 
@@ -165,7 +161,28 @@ class log_in
         window.add(jpassword);
 
 
-        
+
+
+
+
+        JButton c_button1 = new JButton("Sign in");
+        c_button1.setSize(100, 30);
+        c_button1.setLocation(300, 400);
+        c_button1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                boolean log_or_not = fuc2.log_return();
+                if(log_or_not == true){
+                    new Atm();
+                }
+            }
+        });
+        window.add(c_button1);
+
+
+
+
 
         window.setVisible(true);
 

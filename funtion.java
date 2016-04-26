@@ -33,7 +33,15 @@ class function
 
 
 
-
+////
+    String log_in_id;
+    String log_in_pin;
+    void search_id(String n){
+        log_in_id = n;
+    }
+    void search_pin(String n){
+        log_in_pin = n;
+    }
 
 
 
@@ -205,11 +213,75 @@ class function
 
 
 
-    void caiman_log(){
+    boolean log_return()
+    {
+        int pincheck = Integer.parseInt(log_in_pin);
+        try
+        {
+
+
+            String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+            String userName = "aws1";
+            String password = "passw0rd";
+            String dbName = "Java";
+
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+            Statement stmt=conn.createStatement();
+
+            String query="select * from bank where ID =" + "\""+ log_in_id +"\""+";";
+
+            ResultSet rs=stmt.executeQuery(query);
+            if(rs.next())
+            {
+                String checkUser=rs.getString(1);
+                String checkfn=rs.getString(2);
+                String checkmn = rs.getString(3);
+                String checkln = rs.getString(4);
+                double checkmoney = rs.getDouble(5);
+                int checkPin = rs.getInt(6);
+
+
+
+                if(checkUser.equals(log_in_id) && pincheck == checkPin)
+
+                {
+
+                    return true;
+                }
+                conn.close();
+
+
+
+            }
+
+
+        }
+        catch (Exception e)
+        {
+
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        finally {
+            System.out.println("");
+        }
+        return false;
+
+
+
 
     }
 
 
 
+
 }
+
+
+
+
+
+
+
 
