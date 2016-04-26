@@ -663,6 +663,7 @@ class transferFunds
             {
                 try {
                     f.transferFunds(id, pin, Double.parseDouble(tAmnt.getText()), tId.getText());
+                    JOptionPane.showMessageDialog(null,"You've successfully transfered " + tAmnt + " dollars!","Transfer",JOptionPane.INFORMATION_MESSAGE);
                 } catch (NumberFormatException | InstantiationException | IllegalAccessException
                         | ClassNotFoundException | SQLException e1) {
                     // TODO Auto-generated catch block
