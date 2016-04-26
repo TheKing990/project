@@ -173,10 +173,11 @@ class log_in
             public void actionPerformed(ActionEvent e)
             {
                 boolean log_or_not = fuc2.log_return();
-                if(log_or_not == true){
-                    new userMenu(jbank_id.getText(), jpassword.getText());
+                if(log_or_not == true)
+                {
+                    new  userMenu();
         	    window.dispose();	
-                   // new Atm();
+
                 }
             }
         });
@@ -193,8 +194,7 @@ class log_in
 }
 
 
-class c_sign
-{
+class c_sign {
     private JLabel fname;
     private JLabel lname;
     private JLabel mname;
@@ -216,7 +216,7 @@ class c_sign
     private JTextField jbank_id;
     private JTextField jpassword;
 
-    c_sign(){
+    c_sign() {
 
 
         function fuc = new function();
@@ -245,13 +245,11 @@ class c_sign
         window.add(fname);
 
 
-        jfn= new JTextField(10);
+        jfn = new JTextField(10);
         jfn.setSize(160, 30);
         jfn.setLocation(140, 220);
-        jfn.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
+        jfn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 String str1 = jfn.getText();
                 fuc.add_fname(str1);
 
@@ -262,23 +260,17 @@ class c_sign
         window.add(jfn);
 
 
-
-
-
-
         mname = new JLabel("Middle Name");
         mname.setSize(100, 30);
         mname.setLocation(50, 250);
         window.add(mname);
 
 
-        jmn= new JTextField(10);
+        jmn = new JTextField(10);
         jmn.setSize(160, 30);
         jmn.setLocation(140, 250);
-        jmn.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
+        jmn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 String str8 = jmn.getText();
                 fuc.add_mname(str8);
 
@@ -289,27 +281,17 @@ class c_sign
         window.add(jmn);
 
 
-
-
-
-
-
-
-
-
-        lname= new JLabel("Last Name");
+        lname = new JLabel("Last Name");
         lname.setSize(100, 30);
         lname.setLocation(50, 280);
         window.add(lname);
 
 
-        jln= new JTextField(10);
+        jln = new JTextField(10);
         jln.setSize(160, 30);
         jln.setLocation(140, 280);
-        jln.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
+        jln.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 String str2 = jln.getText();
                 fuc.add_lname(str2);
 
@@ -320,37 +302,22 @@ class c_sign
         window.add(jln);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         ///password
 
 
-        pin= new JLabel("Pin");
+        pin = new JLabel("Pin");
         pin.setSize(100, 30);
         pin.setLocation(50, 340);
         window.add(pin);
 
 
-        jp= new JTextField(10);
+        jp = new JTextField(10);
         jp.setSize(160, 30);
         jp.setLocation(140, 340);
-        jp.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
+        jp.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 String str3 = jp.getText();
-               fuc.add_pin(str3);
+                fuc.add_pin(str3);
 
             }
 
@@ -359,31 +326,20 @@ class c_sign
         window.add(jp);
 
 
-
-
-
-
-
-
-
-
-
         //id
 
 
-        id= new JLabel("ID");
+        id = new JLabel("ID");
         id.setSize(100, 30);
         id.setLocation(50, 310);
         window.add(id);
 
 
-        jid= new JTextField(10);
+        jid = new JTextField(10);
         jid.setSize(160, 30);
         jid.setLocation(140, 310);
-        jid.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
+        jid.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 String str4 = jid.getText();
                 fuc.add_id(str4);
 
@@ -394,19 +350,13 @@ class c_sign
         window.add(jid);
 
 
-
-
-
         JButton c_button1 = new JButton("Sign Up");
         c_button1.setSize(100, 30);
         c_button1.setLocation(300, 400);
         //c_button1.addActionListener();
-        c_button1.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                try
-                {
+        c_button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
                     fuc.add_c_bank();
                 } catch (InstantiationException e1) {
                     e1.printStackTrace();
@@ -426,206 +376,254 @@ class c_sign
 
 
         window.add(c_button1);
-
-
-
-class userMenu
-{
-    private JLabel bank_id;
-    private JLabel password;
-    private JLabel message_c;
-
-    private JTextField jbank_id;
-    private JTextField jpassword;
-
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
-
-    userMenu(String id, String pin) {
-
-        function f = new function();
-
-        final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
-        JFrame window = new JFrame("User Menu");
-        Color db = new Color(119, 136, 159);
-        Color sb = new Color(0, 191, 255);
-
-        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(null);
-        window.getContentPane().setBackground(db);
-
-        System.out.println(id + " " + pin);
-
-        String str = "";
-        try {
-            str = f.getWelcomeInfo(id,  pin);
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        message_c = new JLabel(str);
-        message_c.setSize(700, 50);
-        message_c.setFont(new Font("Verdana", Font.ITALIC, 35));
-        message_c.setLocation(180, 200);
-        window.add(message_c);
-
-        button1 = new JButton("Account Summary");
-        button1.setSize(200, 30);
-        button1.setLocation(250, 250);
-        button1.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                //new log_in();
-                //Account Summary
-
-                window.setVisible(false);
-                String summary = "";
-                try {
-                    summary = f.getAccountInfo(id, pin);
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-                        | SQLException e1) {
-                    e1.printStackTrace();
-                }
-
-                JOptionPane.showMessageDialog(null,
-                        summary,
-                        "Account Summary",
-                        JOptionPane.PLAIN_MESSAGE);
-                window.setVisible(true);
-
-            }
-        });
-        window.add(button1);
-
-        button2 = new JButton("Withdrawel");
-        button2.setSize(200, 30);
-        button2.setLocation(250, 300);
-        button2.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                //new log_in();
-                //window.dispose();
-                //user user id to change password
-                //Prompt with balance and prompt
-                String balance = "";
-                try {
-                    balance = f.getBalance(id, pin);
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-                        | SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
-                String wAmnt = JOptionPane.showInputDialog(null, "Balance: " + balance +"\nWithdraw: ", "0.0");
-                double num = Double.parseDouble(wAmnt);
-
-                try {
-                    f.withdraw(num, id, pin);
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-                        | SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        });
-        window.add(button2);
-
-        button3 = new JButton("Deposit");
-        button3.setSize(200, 30);
-        button3.setLocation(250, 350);
-        button3.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                //new log_in();
-                //window.dispose();
-                String balance = "";
-                try {
-                    balance = f.getBalance(id, pin);
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-                        | SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
-                String wAmnt = JOptionPane.showInputDialog(null, "Balance: " + balance +"\nDeposit: ", "0.0");
-                double num = Double.parseDouble(wAmnt);
-
-                try {
-                    f.deposit(num, id, pin);
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-                        | SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        });
-        window.add(button3);
-
-        button4 = new JButton("Current Session Log");
-        button4.setSize(200, 30);
-        button4.setLocation(250, 400);
-        button4.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                new log_in();
-                window.dispose();
-
-            }
-        });
-        window.add(button4);
-
-        button5 = new JButton("Transfer Funds");
-        button5.setSize(200, 30);
-        button5.setLocation(250, 450);
-        button5.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                new log_in();
-                window.dispose();
-
-            }
-        });
-        window.add(button5);
-
-        button6 = new JButton("Log Off");
-        button6.setSize(200, 30);
-        button6.setLocation(250, 500);
-        button6.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {//Already Works
-                new log_in();
-                window.dispose();
-
-            }
-        });
-        window.add(button6);
-        // display();
-
-
-        window.setVisible(true);
     }
 }
 
 
+        class userMenu {
+            private JLabel bank_id;
+            private JLabel password;
+            private JLabel message_c;
+
+            private JTextField jbank_id;
+            private JTextField jpassword;
+
+            private JButton button1;
+            private JButton button2;
+            private JButton button3;
+            private JButton button4;
+            private JButton button5;
+            private JButton button6;
+
+            userMenu() {
+
+
+                function f = new function();
+                String id = f.return_current_id();
+                String pin = f.return_current_id();
+
+                final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
+                JFrame window = new JFrame("User Menu");
+                Color db = new Color(119, 136, 159);
+                Color sb = new Color(0, 191, 255);
+
+                window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+                window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                window.setLayout(null);
+                window.getContentPane().
+
+                        setBackground(db);
+
+                System.out.println(id + " " + pin);
+
+                String str = "";
+                try
+
+                {
+                    str = f.getWelcomeInfo(id, pin);
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException |
+                        SQLException e1
+                        )
+
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+                message_c = new
+
+                        JLabel(str);
+
+                message_c.setSize(700, 50);
+                message_c.setFont(new
+
+                        Font("Verdana", Font.ITALIC, 35)
+
+                );
+                message_c.setLocation(180, 200);
+                window.add(message_c);
+
+                button1 = new
+
+                        JButton("Account Summary");
+
+                button1.setSize(200, 30);
+                button1.setLocation(250, 250);
+                button1.addActionListener(new
+
+                                                  ActionListener() {
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          //new log_in();
+                                                          //Account Summary
+
+                                                          window.setVisible(false);
+                                                          String summary = "";
+                                                          try {
+                                                              summary = f.getAccountInfo(id, pin);
+                                                          } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                                                                  | SQLException e1) {
+                                                              e1.printStackTrace();
+                                                          }
+
+                                                          JOptionPane.showMessageDialog(null,
+                                                                  summary,
+                                                                  "Account Summary",
+                                                                  JOptionPane.PLAIN_MESSAGE);
+                                                          window.setVisible(true);
+
+                                                      }
+                                                  }
+
+                );
+                window.add(button1);
+
+                button2 = new
+
+                        JButton("Withdrawel");
+
+                button2.setSize(200, 30);
+                button2.setLocation(250, 300);
+                button2.addActionListener(new
+
+                                                  ActionListener() {
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          //new log_in();
+                                                          //window.dispose();
+                                                          //user user id to change password
+                                                          //Prompt with balance and prompt
+                                                          String balance = "";
+                                                          try {
+                                                              balance = f.getBalance(id, pin);
+                                                          } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                                                                  | SQLException e1) {
+                                                              // TODO Auto-generated catch block
+                                                              e1.printStackTrace();
+                                                          }
+
+                                                          String wAmnt = JOptionPane.showInputDialog(null, "Balance: " + balance + "\nWithdraw: ", "0.0");
+                                                          double num = Double.parseDouble(wAmnt);
+
+                                                          try {
+                                                              f.withdraw(num, id, pin);
+                                                          } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                                                                  | SQLException e1) {
+                                                              // TODO Auto-generated catch block
+                                                              e1.printStackTrace();
+                                                          }
+                                                      }
+                                                  }
+
+                );
+                window.add(button2);
+
+                button3 = new
+
+                        JButton("Deposit");
+
+                button3.setSize(200, 30);
+                button3.setLocation(250, 350);
+                button3.addActionListener(new
+
+                                                  ActionListener() {
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          //new log_in();
+                                                          //window.dispose();
+                                                          String balance = "";
+                                                          try {
+                                                              balance = f.getBalance(id, pin);
+                                                          } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                                                                  | SQLException e1) {
+                                                              // TODO Auto-generated catch block
+                                                              e1.printStackTrace();
+                                                          }
+
+                                                          String wAmnt = JOptionPane.showInputDialog(null, "Balance: " + balance + "\nDeposit: ", "0.0");
+                                                          double num = Double.parseDouble(wAmnt);
+
+                                                          try {
+                                                              f.deposit(num, id, pin);
+                                                          } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                                                                  | SQLException e1) {
+                                                              // TODO Auto-generated catch block
+                                                              e1.printStackTrace();
+                                                          }
+                                                      }
+                                                  }
+
+                );
+                window.add(button3);
+
+                button4 = new
+
+                        JButton("Current Session Log");
+
+                button4.setSize(200, 30);
+                button4.setLocation(250, 400);
+                button4.addActionListener(new
+
+                                                  ActionListener() {
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          new log_in();
+                                                          window.dispose();
+
+                                                      }
+                                                  }
+
+                );
+                window.add(button4);
+
+                button5 = new
+
+                        JButton("Transfer Funds");
+
+                button5.setSize(200, 30);
+                button5.setLocation(250, 450);
+                button5.addActionListener(new
+
+                                                  ActionListener() {
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          new log_in();
+                                                          window.dispose();
+
+                                                      }
+                                                  }
+
+                );
+                window.add(button5);
+
+                button6 = new
+
+                        JButton("Log Off");
+
+                button6.setSize(200, 30);
+                button6.setLocation(250, 500);
+                button6.addActionListener(new
+
+                                                  ActionListener() {
+                                                      public void actionPerformed(ActionEvent e) {//Already Works
+                                                          new log_in();
+                                                          window.dispose();
+
+                                                      }
+                                                  }
+
+                );
+                window.add(button6);
+                // display();
+
+
+                window.setVisible(true);
+
+
+                window.setVisible(true);
+            }
+        }
 
 
 
 
-        window.setVisible(true);
 
-    }
+    /*
     
     class userMenu
 {
@@ -810,6 +808,7 @@ class userMenu
         window.setVisible(true);
     }
 }
+    /*
 
 class transfer
 {
@@ -893,6 +892,7 @@ class transfer
     }
 }
 }
+*/
 
 
 
