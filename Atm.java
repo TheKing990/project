@@ -466,7 +466,7 @@ class transferFunds
         });
         window.add(tAmnt);
         
-        Label1= new JLabel("ID");
+        Label1= new JLabel("Enter recipient ID");
         Label1.setSize(100, 30);
         Label1.setLocation(380, 300);
         window.add(Label1);
@@ -485,6 +485,7 @@ class transferFunds
 					{						
 						try {
 							f.transferFunds(id, pin, Double.parseDouble(tAmnt.getText()), tId.getText());
+							JOptionPane.showMessageDialog(null,"You've successfully transferred " + tAmnt + " dollars!","Deposit",JOptionPane.INFORMATION_MESSAGE);
 						} catch (NumberFormatException | InstantiationException | IllegalAccessException
 								| ClassNotFoundException | SQLException | IOException e1) {
 							// TODO Auto-generated catch block
