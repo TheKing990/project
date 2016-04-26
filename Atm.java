@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.*;
 
@@ -273,7 +274,7 @@ class userMenu
 				});
 		window.add(button1);
         
-		button2 = new JButton("Withdrawel");
+		button2 = new JButton("Withdrawal");
 		button2.setSize(200, 30);
 		button2.setLocation(250, 300);
 		button2.addActionListener(new ActionListener()
@@ -299,7 +300,7 @@ class userMenu
 						try {
 							f.withdraw(num, id, pin);
 						} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-								| SQLException e1) {
+								| SQLException | IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -331,7 +332,7 @@ class userMenu
 						try {
 							f.deposit(num, id, pin);
 						} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-								| SQLException e1) {
+								| SQLException | IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -458,7 +459,7 @@ class transferFunds
 						try {
 							f.transferFunds(id, pin, Double.parseDouble(tAmnt.getText()), tId.getText());
 						} catch (NumberFormatException | InstantiationException | IllegalAccessException
-								| ClassNotFoundException | SQLException e1) {
+								| ClassNotFoundException | SQLException | IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}

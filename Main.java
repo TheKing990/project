@@ -1,11 +1,13 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.io.PrintWriter;
 import java.sql.*;
+import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException
 	{
 		// TODO Auto-generated method stub
        		Atm m =  new Atm();
@@ -16,6 +18,9 @@ public class Main {
 		String password = "passw0rd";
 		String dbName = "Java";
 
+		PrintWriter pChecker = new PrintWriter("session.txt"); //create and or wipe out any previously left content
+		pChecker.close();
+		
 		
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection connection = DriverManager.getConnection(url + dbName, userName, password);
