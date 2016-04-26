@@ -273,6 +273,132 @@ class function
 
     }
 
+     String getWelcomeInfo(String id, String pin) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+    	String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+        Statement stmt = conn.createStatement();
+        
+        String query = "select * from bank where id = '" + id + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        rs.next();
+        
+    	return "Welcome " + rs.getString(2) + " " + rs.getString(4);
+    }
+
+    String getAccountInfo(String id, String pin) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+    	String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+        Statement stmt = conn.createStatement();
+    	
+        String query = "select * from bank where id = '" + id + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        rs.next();
+        
+        String str = String.format("ID: %-20s \nFirst Name: %-20s \nMiddle Name: %-20s \nLast Name: %-20s "
+        		+ "\nBalance: %-20s \nPIN: %-4s", rs.getString(1), rs.getString(2),rs.getString(3),
+    		rs.getString(4), rs.getString(5), rs.getString(6));
+        
+    	return str;
+    }
+    
+    String getBalance(String id, String pin) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+    	String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+        Statement stmt = conn.createStatement();
+    	
+        String query = "select * from bank where id = '" + id + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        rs.next();
+    	
+        System.out.println(rs.getString(5));
+        
+    	return ""+rs.getString(5);
+    }
+    
+    void transferFunds(String cid, String cpin, double transferAmnt, String ID) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException
+	{
+    	String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+        Statement stmt = conn.createStatement();
+		
+        double add = transferAmnt;
+        
+        //remove money from user 1
+        String query = "select * from bank where id = '" + cid + "';";
+        ResultSet rs1 = stmt.executeQuery(query);
+        rs1.next();
+        transferAmnt = rs1.getInt(5)- transferAmnt;
+        stmt.executeUpdate("UPDATE bank SET currentbalance = "+ transferAmnt +" WHERE id = '" + cid + "';");
+        
+        //give money to user2
+        query = "select * from bank where id = '" + ID + "';";
+        ResultSet rs2 = stmt.executeQuery(query);
+        rs2.next();
+        transferAmnt = rs2.getInt(5)+ add;
+        stmt.executeUpdate("UPDATE bank SET currentbalance = "+ transferAmnt +" WHERE id = '" + ID + "';");
+	}
+    
+    void withdraw(double n, String id, String pin) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+    	String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+        String userName = "aws1";
+        String password = "passw0rd";
+        String dbName = "Java";
+
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+        Statement stmt = conn.createStatement();
+    	
+        String query = "select * from bank where id = '" + id + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        rs.next();
+        n = rs.getInt(5)- n;
+        
+        stmt.executeUpdate("UPDATE bank SET currentbalance = "+ n +" WHERE id = '" + id + "';");
+    }
+    
+    void deposit(double n, String id, String pin) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+	    String url = "jdbc:mysql://javadb.czgc4neigria.us-west-2.rds.amazonaws.com:3306/";
+	    String userName = "aws1";
+	    String password = "passw0rd";
+	    String dbName = "Java";
+	
+	    Class.forName("com.mysql.jdbc.Driver").newInstance();
+	    Connection conn = DriverManager.getConnection(url + dbName , userName, password);
+	    Statement stmt = conn.createStatement();
+		
+	    String query = "select * from bank where id = '" + id + "';";
+	    ResultSet rs = stmt.executeQuery(query);
+	    rs.next();
+	    n = rs.getInt(5)+ n;
+	    
+	    stmt.executeUpdate("UPDATE bank SET currentbalance = "+ n +" WHERE id = '" + id + "';");
+    }
+    
 
 
 
