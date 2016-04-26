@@ -545,22 +545,21 @@ class userMenu
         window.add(button3);
 
         button4 = new JButton("Current Session Log");
-        button4.setSize(200, 30);
+       button4.setSize(200, 30);
         button4.setLocation(250, 400);
         button4.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                new log_in();
-                window.dispose();
-
+       {
+           public void actionPerformed(ActionEvent e)
+           {
+               new log_in();
+               window.dispose();
             }
         });
-        window.add(button4);
+//        window.add(button4);
 
         button5 = new JButton("Transfer Funds");
         button5.setSize(200, 30);
-        button5.setLocation(250, 450);
+        button5.setLocation(250, 400);
         button5.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
