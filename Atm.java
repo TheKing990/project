@@ -451,28 +451,29 @@ class c_sign {
                 button1.setLocation(250, 250);
                 button1.addActionListener(new
 
-                                                  ActionListener() {
-                                                      public void actionPerformed(ActionEvent e) {
+               ActionListener() {
+                   public void actionPerformed(ActionEvent e) {
                                                           //new log_in();
                                                           //Account Summary
 
-                                                          window.setVisible(false);
-                                                          String summary = "";
-                                                          try {
-                                                              summary = f.getAccountInfo(id, pin);
-                                                          } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-                                                                  | SQLException e1) {
-                                                              e1.printStackTrace();
-                                                          }
+                       window.setVisible(false);
+                       String summary = "";
+                       try {
+                           summary = f.getAccountInfo(id, pin);
+                       } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                               | SQLException e1)
+                       {
+                           e1.printStackTrace();
+                       }
 
-                                                          JOptionPane.showMessageDialog(null,
-                                                                  summary,
-                                                                  "Account Summary",
-                                                                  JOptionPane.PLAIN_MESSAGE);
-                                                          window.setVisible(true);
+                       JOptionPane.showMessageDialog(null,
+                               summary,
+                               "Account Summary",
+                               JOptionPane.PLAIN_MESSAGE);
+                       window.setVisible(true);
 
-                                                      }
-                                                  }
+                   }
+               }
 
                 );
                 window.add(button1);
@@ -808,7 +809,8 @@ class c_sign {
         window.setVisible(true);
     }
 }
-    /*
+*/
+
 
 class transfer
 {
@@ -817,9 +819,13 @@ class transfer
     private JTextField t1;
     private JTextField t2;
 
-    transfer(String id, String pin) {
-    	
+    transfer( )
+    {
+
     	function f = new function();
+        String id = f.return_current_id();
+        int pin = f.return_pin();
+
     	
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
         JFrame window = new JFrame("Transfer Funds");
@@ -868,6 +874,7 @@ class transfer
         button1 = new JButton("Transfer");
 		button1.setSize(100, 30);
 		button1.setLocation(250, 400);
+        /*
 		button1.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
@@ -886,13 +893,14 @@ class transfer
 				
 					}
 				});
+				*/
 		window.add(button1);
         
         window.setVisible(true);
     }
 }
-}
-*/
+
+
 
 
 
