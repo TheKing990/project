@@ -668,6 +668,10 @@ class c_sign
                     e1.printStackTrace();
                 }
                 window.dispose();
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                 new Atm();
             }
         });
