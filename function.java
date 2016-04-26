@@ -35,6 +35,18 @@ class function
     String c_getid;
     String c_ency_pass;
 
+    String caiman_id_log;
+    String caiman_pass_log;
+
+
+
+    void  caiman_add_id(String n){
+        caiman_id_log = n;
+    }
+    void caiman_add_pass(String n){
+        caiman_pass_log = n;
+    }
+
 
     private static final String ALGORITHM = "AES";
     private static final String KEY = "1Hbfh667adfDEJ78";
@@ -84,15 +96,21 @@ class function
 
 
 
-    public  void add_c_bank() throws Exception {
+
+
+
+
+
+
+    public void add_c_bank() throws Exception {
         double c_money = 0.0;
         int bank_num1 = 1;
 
-        try {
+       /// try {
            c_firstn = encrypt(c_fn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       // } catch (Exception e) {
+          //  e.printStackTrace();
+      //  }
 
          c_lastn = encrypt(c_ln);
         c_getid = encrypt(c_id);
@@ -155,6 +173,10 @@ class function
     }
 
 
+
+
+
+
     String rnum()
     {
         final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -165,6 +187,13 @@ class function
             sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
         return sb.toString();
     }
+
+
+
+
+
+
+
 
     boolean c_id_check(String n) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
     {
@@ -192,6 +221,13 @@ class function
         }
         conn.close();
         return c1;
+
+    }
+
+
+
+
+    void caiman_log(){
 
     }
 
