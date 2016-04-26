@@ -31,6 +31,16 @@ class function
 
 
 
+    String current_id1;
+    String current_firstname;
+    String current_middlename;
+    String current_lastname;
+    double current_balance;
+    int  current_pin;
+
+
+
+
 
 
 ////
@@ -246,8 +256,9 @@ class function
                 if(checkUser.equals(log_in_id) && pincheck == checkPin)
 
                 {
-
+                    get_current_user(checkUser,checkfn,checkmn,checkln,checkmoney,checkPin);
                     return true;
+
                 }
                 conn.close();
 
@@ -399,6 +410,23 @@ class function
 	    stmt.executeUpdate("UPDATE bank SET currentbalance = "+ n +" WHERE id = '" + id + "';");
     }
     
+
+    void get_current_user(String id9, String fn, String mn, String ln, double bl, int ifpin){
+         current_id1 = id9;
+         current_firstname = fn;
+         current_middlename = mn;
+        current_lastname = ln;
+         current_balance = bl;
+          current_pin = ifpin;
+
+    }
+
+
+
+
+
+
+
 
 
 
