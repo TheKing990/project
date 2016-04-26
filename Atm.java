@@ -34,8 +34,15 @@ public class Atm extends JFrame
 		button1 = new JButton("Log In");
 		button1.setSize(100, 30);
 		button1.setLocation(250, 400);
-		button1.addActionListener(new Button1Clicked());
-		window.add(button1);
+		button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                new log_in();
+                window.dispose();
+            }
+        });
+
+        window.add(button1);
 		
 		button2 = new JButton("Sign Up");
 		button2.setSize(100, 30);
@@ -44,6 +51,7 @@ public class Atm extends JFrame
             public void actionPerformed(ActionEvent e) {
 
                 new c_sign();
+                window.dispose();
             }
         });
 
@@ -72,13 +80,6 @@ public class Atm extends JFrame
 			}
 	} 
 	
-	private class Button2Clicked implements ActionListener
-	{
-			public void actionPerformed(ActionEvent e)
-			{
-				new c_sign();
-			}
-	}
 
    
 
@@ -567,7 +568,7 @@ class userMenu
         {
             public void actionPerformed(ActionEvent e)
             {//Already Works
-                new log_in();
+                new Atm();
                 window.dispose();
 
             }
