@@ -24,28 +24,17 @@ class function
     function(){};
     String c_fn;
     String c_ln;
-    String c_ps;
+    String c_pin;
     String c_id;
-    String c_password;
-
-
-    //
-    String c_firstn;
-    String c_lastn;
-    String c_getid;
-    String c_ency_pass;
-
-    String caiman_id_log;
-    String caiman_pass_log;
+    String c_mn;
 
 
 
-    void  caiman_add_id(String n){
-        caiman_id_log = n;
-    }
-    void caiman_add_pass(String n){
-        caiman_pass_log = n;
-    }
+
+
+
+
+
 
 
     private static final String ALGORITHM = "AES";
@@ -83,11 +72,14 @@ class function
     void add_fname(String n){
         c_fn = n;
     }
+    void add_mname(String n){
+        c_mn = n;
+    }
     void add_lname(String n){
         c_ln = n;
     }
-    void add_password(String n){
-        c_ps = n;
+    void add_pin(String n){
+        c_pin = n;
     }
     void add_id(String n){
         c_id = n;
@@ -104,28 +96,14 @@ class function
 
     public void add_c_bank() throws Exception {
         double c_money = 0.0;
-        int bank_num1 = 1;
-
-        /// try {
-        c_firstn = encrypt(c_fn);
-        // } catch (Exception e) {
-        //  e.printStackTrace();
-        //  }
-
-        c_lastn = encrypt(c_ln);
-        c_getid = encrypt(c_id);
-        c_ency_pass = encrypt(c_ps);
+        int pin = Integer.parseInt(c_pin);
 
 
 
 
-        while (true) {
-            c_password = rnum();
-            boolean c2 = c_id_check(c_password);
-            if (c2 == false){
-                break;
-            }
-        }
+
+
+
 
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -136,18 +114,18 @@ class function
             String dbName = "Java";
             //Statement st = conn.createStatement();
             Connection conn = DriverManager.getConnection(url + dbName , userName, password);
-            if(c_fn != null&& c_ln!= null&& c_ps != null&& c_id != null)
+            if(c_fn != null&& c_ln!= null&& c_id != null)
             {
-                String sql = "INSERT INTO Caiman ( ID ,Money ,fname, lname ,pword,upassword,back_number ) VALUES (?, ?, ?, ?, ?,?,?)";
+                String sql = "INSERT INTO bank ( ID ,FirstName ,MiddleName, LastName ,CurrentBalance,PIN ) VALUES (?, ?, ?, ?, ?,?)";
 
                 PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setString(1, c_getid);
-                preparedStatement.setDouble(2, c_money);
-                preparedStatement.setString(3, c_firstn);
-                preparedStatement.setString(4, c_lastn);
-                preparedStatement.setString(5, c_password);
-                preparedStatement.setString(6, c_ency_pass);
-                preparedStatement.setInt(7, bank_num1);
+                preparedStatement.setString(1, c_id);
+                preparedStatement.setString(2, c_fn);
+                preparedStatement.setString(3, c_mn);
+                preparedStatement.setString(4, c_ln);
+                preparedStatement.setDouble(5, c_money);
+                preparedStatement.setInt(6, pin);
+
                 preparedStatement.executeUpdate();
 
 

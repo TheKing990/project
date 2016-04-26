@@ -178,13 +178,15 @@ class c_sign
 {
     private JLabel fname;
     private JLabel lname;
-    private JLabel password;
+    private JLabel mname;
     private JLabel id;
     private JLabel user_pass;
+    private JLabel pin;
 
 
     private JTextField jfn;
     private JTextField jln;
+    private JTextField jmn;
     private JTextField jp;
     private JTextField juserp;
     private JTextField jid;
@@ -201,7 +203,7 @@ class c_sign
         function fuc = new function();
 
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
-        JFrame window = new JFrame("Sign In");
+        JFrame window = new JFrame("Sign UP");
         Color db = new Color(119, 136, 159);
         Color sb = new Color(0, 191, 255);
 
@@ -245,18 +247,46 @@ class c_sign
 
 
 
+        mname = new JLabel("Middle Name");
+        mname.setSize(100, 30);
+        mname.setLocation(50, 250);
+        window.add(mname);
+
+
+        jmn= new JTextField(10);
+        jmn.setSize(160, 30);
+        jmn.setLocation(140, 250);
+        jmn.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                String str8 = jmn.getText();
+                fuc.add_mname(str8);
+
+            }
+
+
+        });
+        window.add(jmn);
+
+
+
+
+
+
+
 
 
 
         lname= new JLabel("Last Name");
         lname.setSize(100, 30);
-        lname.setLocation(50, 250);
+        lname.setLocation(50, 280);
         window.add(lname);
 
 
         jln= new JTextField(10);
         jln.setSize(160, 30);
-        jln.setLocation(140, 250);
+        jln.setLocation(140, 280);
         jln.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -280,30 +310,34 @@ class c_sign
 
 
 
+
+
+
+
         ///password
 
 
-        user_pass= new JLabel("Password");
-        user_pass.setSize(100, 30);
-        user_pass.setLocation(50, 280);
-        window.add(user_pass);
+        pin= new JLabel("Pin");
+        pin.setSize(100, 30);
+        pin.setLocation(50, 340);
+        window.add(pin);
 
 
-        juserp= new JTextField(10);
-        juserp.setSize(160, 30);
-        juserp.setLocation(140, 280);
-        juserp.addActionListener(new ActionListener()
+        jp= new JTextField(10);
+        jp.setSize(160, 30);
+        jp.setLocation(140, 340);
+        jp.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                String str3 = juserp.getText();
-                fuc.add_password(str3);
+                String str3 = jp.getText();
+               fuc.add_pin(str3);
 
             }
 
 
         });
-        window.add(juserp);
+        window.add(jp);
 
 
 
@@ -320,13 +354,13 @@ class c_sign
 
         id= new JLabel("ID");
         id.setSize(100, 30);
-        id.setLocation(50, 320);
+        id.setLocation(50, 310);
         window.add(id);
 
 
         jid= new JTextField(10);
         jid.setSize(160, 30);
-        jid.setLocation(140, 320);
+        jid.setLocation(140, 310);
         jid.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
