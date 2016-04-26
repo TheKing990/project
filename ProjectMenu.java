@@ -35,7 +35,6 @@ public class ProjectMenu
 	public static void display_accountSummary(Statement stmt, ResultSet result) throws SQLException
 	{
 		//Show user name, ID, PIN, Current session log activity, current balance and any other important information about the user's account
-		System.out.println("Coming soon!");
 		result.next();
 		String ID = "ID", FNAME = "FIRST NAME" , MNAME = "MIDDLE NAME" , LNAME = "LAST NAME" , BALANCE = "BALANCE" , PIN = "PIN";
 		System.out.printf("%-20s%-20s%-20s%-20s%-20s%-4s", ID, FNAME, MNAME, LNAME, BALANCE, PIN); 
@@ -182,8 +181,6 @@ public class ProjectMenu
 	
 	public static void deposit(Statement stmt, double depoAmnt, double balance, String ID, PrintWriter session) throws SQLException
 	{ //Code to execute deposit to account
-		
-		//System.out.println("Coming soon!");
 		
 		double newBalance = balance + depoAmnt;
 		
