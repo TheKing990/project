@@ -21,7 +21,7 @@ public class Atm extends JFrame
 	private JButton secrect_bank;
     private JButton eu_and_asia;
 	
->>>>>>> dev
+//>>>>>>> dev
 	public Atm()
 	{
 		final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
