@@ -238,13 +238,14 @@ class function
 
         String query = "select * from bank where id = '" + id + "';";
         ResultSet rs = stmt.executeQuery(query);
-        rs.next();
+       rs.next();
 
-        String str = String.format("ID: %-20s \nFirst Name: %-20s \nMiddle Name: %-20s \nLast Name: %-20s "
-                        + "\nBalance: %-20s \nPIN: %-4s", rs.getString(1), rs.getString(2),rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getString(6));
+           String str = String.format("ID: %-20s \nFirst Name: %-20s \nMiddle Name: %-20s \nLast Name: %-20s "
+                           + "\nBalance: %-20s \nPIN: %-4s", rs.getString(1), rs.getString(2), rs.getString(3),
+                   rs.getString(4), rs.getString(5), rs.getString(6));
 
-        return str;
+           return str;
+
     }
 
     String getBalance(String id, String pin) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
@@ -299,10 +300,11 @@ class function
 
         String query = "select * from bank where id = '" + id + "';";
         ResultSet rs = stmt.executeQuery(query);
-        rs.next();
-        n = rs.getInt(5)+ n;
+        if (rs.next()) {
+            n = rs.getInt(5) + n;
 
-        stmt.executeUpdate("UPDATE bank SET currentbalance = "+ n +" WHERE id = '" + id + "';");
+            stmt.executeUpdate("UPDATE bank SET currentbalance = " + n + " WHERE id = '" + id + "';");
+        }
     }
 
 

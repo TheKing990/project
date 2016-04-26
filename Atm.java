@@ -378,6 +378,7 @@ class c_sign {
         window.add(c_button1);
     }
 }
+/*
 
 
         class userMenu {
@@ -400,7 +401,8 @@ class c_sign {
 
                 function f = new function();
                 String id = f.return_current_id();
-                String pin = f.return_current_id();
+                int pin1 = f.return_pin();
+                String pin = Integer.toString(pin1);
 
                 final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
                 JFrame window = new JFrame("User Menu");
@@ -602,7 +604,7 @@ class c_sign {
 
                                                   ActionListener() {
                                                       public void actionPerformed(ActionEvent e) {//Already Works
-                                                          new log_in();
+                                                          new Atm();
                                                           window.dispose();
 
                                                       }
@@ -616,7 +618,7 @@ class c_sign {
                 window.setVisible(true);
 
 
-                window.setVisible(true);
+
             }
         }
 
@@ -624,7 +626,7 @@ class c_sign {
 
 
 
-    /*
+    */
     
     class userMenu
 {
@@ -637,9 +639,13 @@ class c_sign {
     private JButton button5;
     private JButton button6;
 
-    userMenu(String id, String pin) {
+    userMenu() {
     	
     	function f = new function();
+
+        String id = f.return_current_id();
+        int pin1 = f.return_pin();
+        String pin = Integer.toString(pin1);
     	
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
         JFrame window = new JFrame("User Menu");
@@ -784,7 +790,7 @@ class c_sign {
 					{
 						
 					//	window.setVisible(false);
-						new transfer(id, pin);
+						new transfer();
 						//window.setVisible(true);
 					}
 				});
@@ -809,7 +815,7 @@ class c_sign {
         window.setVisible(true);
     }
 }
-*/
+
 
 
 class transfer
@@ -824,7 +830,8 @@ class transfer
 
     	function f = new function();
         String id = f.return_current_id();
-        int pin = f.return_pin();
+        int pin1 = f.return_pin();
+        String pin = Integer.toString(pin1);
 
     	
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
