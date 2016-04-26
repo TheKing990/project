@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.*;
 
@@ -39,7 +40,13 @@ public class Atm extends JFrame
 		button2 = new JButton("Sign Up");
 		button2.setSize(100, 30);
 		button2.setLocation(400, 400);
-		button2.addActionListener(new Button2Clicked());
+        button2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                new c_sign();
+            }
+        });
+
 		window.add(button2);
 		
 		messageLabel1 = new JLabel("Bank of the Internet");
@@ -376,6 +383,7 @@ class c_sign {
 
 
         window.add(c_button1);
+        window.setVisible(true);
     }
 }
 
@@ -545,8 +553,8 @@ class userMenu
         {
             public void actionPerformed(ActionEvent e)
             {
-                new log_in();
-                window.dispose();
+                new transferFunds(id,pin);
+              ///  window.dispose();
 
             }
         });
@@ -573,98 +581,91 @@ class userMenu
 }
 
 
-class transfer
+class transferFunds
 {
-    
     private JButton button1;
-    private JTextField t1;
-    private JTextField t2;
+    private JTextField tId;
+    private JTextField tAmnt;
+    private JLabel Label1;
+    private JLabel Label2;
 
-    transfer( )
+    transferFunds(String id, String pin)
     {
+        function f = new function();
 
-    	function f = new function();
-        String id = f.return_current_id();
-        int pin1 = f.return_pin();
-        String pin = Integer.toString(pin1);
-
-    	
         final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 700;
         JFrame window = new JFrame("Transfer Funds");
         Color db = new Color(119, 136, 159);
-       // Color sb = new Color(0, 191, 255);
+
 
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
         window.getContentPane().setBackground(db);
-        
-        t1 = new JTextField(10);
-        t1.setSize(160, 30);
-        t1.setLocation(400, 350);
-        t1.setText("0.0");
-        t1.addActionListener(new ActionListener()
+
+        tId = new JTextField(10);
+        tId.setSize(160, 30);
+        tId.setLocation(400, 300);
+        tId.setText("");
+        tId.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
-               //Get $amnt
- 
-
+                String str = tId.getText();;
             }
 
 
         });
-        window.add(t1);
-        
-        t2 = new JTextField(10);
-        t2.setSize(160, 30);
-        t2.setLocation(400, 250);
-        t2.setText("id");
-        t2.addActionListener(new ActionListener()
+        window.add(tId);
+
+        tAmnt = new JTextField(10);
+        tAmnt.setSize(160, 30);
+        tAmnt.setLocation(400, 350);
+        tAmnt.setText("0.0");
+        tAmnt.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
-               //Get other user id
- 
-
+                String str = tAmnt.getText();;
             }
 
 
         });
-        window.add(t2);
-        
-        button1 = new JButton("Transfer");
-		button1.setSize(100, 30);
-		button1.setLocation(250, 400);
-        /*
-		button1.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{
-						//new log_in();
-						window.dispose();
-						//transfer function
-		
-							try {
-								f.transferFunds(id, pin, Double.parseDouble(t1.getText()), t2.getText());
-							} catch (NumberFormatException | InstantiationException | IllegalAccessException
-									| ClassNotFoundException | SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-				
-					}
-				});
-				*/
-		window.add(button1);
-        
+        window.add(tAmnt);
+
+        Label1= new JLabel("ID");
+        Label1.setSize(100, 30);
+        Label1.setLocation(380, 300);
+        window.add(Label1);
+
+        Label2 = new JLabel("Transfer Amount");
+        Label2.setSize(100, 30);
+        Label2.setLocation(300, 350);
+        window.add(Label2);
+
+        button1 = new JButton("Transfer Funds");
+        button1.setSize(200, 30);
+        button1.setLocation(250, 400);
+        button1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try {
+                    f.transferFunds(id, pin, Double.parseDouble(tAmnt.getText()), tId.getText());
+                } catch (NumberFormatException | InstantiationException | IllegalAccessException
+                        | ClassNotFoundException | SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                window.dispose();
+
+            }
+        });
+        window.add(button1);
+
         window.setVisible(true);
     }
 }
-
-
-
-
 
 
 
